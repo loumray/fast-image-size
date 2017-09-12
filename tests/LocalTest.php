@@ -9,25 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace FastImageSize\Tests;
+namespace FastImageSize\tests;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+use PHPUnit\Framework\TestCase;
 
-class FastImageSize extends \PHPUnit_Framework_TestCase
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
+
+class FastImageSize extends TestCase
 {
-	/** @var \FastImageSize\FastImageSize */
-	protected $imageSize;
-
-	/** @var string Path to fixtures */
 	protected $path;
+    
+    public function setUp()
+    {
+        parent::setUp();
 
-	public function setUp()
-	{
-		parent::setUp();
-		$this->imageSize = new \FastImageSize\FastImageSize();
-		$this->path = __DIR__ . '/fixture/';
+        $this->path = __DIR__.DIRECTORY_SEPARATOR.'fixture'.DIRECTORY_SEPARATOR;
 	}
-
+	
 	public function dataGetImageSize()
 	{
 		return array(
@@ -108,32 +106,25 @@ class FastImageSize extends \PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider dataGetImageSize
 	 */
-	public function test_getImageSize($file, $mime_type, $expected)
+	public function testGetImageSize($file, $mime_type, $shouldbe)
 	{
-		$this->assertEquals($expected, $this->imageSize->getImageSize($this->path . $file, $mime_type));
-	}
 
-	public function dataGetImageSizeRemote()
-	{
-		return array(
-			array(array(
-				'width'		=> 80,
-				'height'	=> 80,
-				'type'		=> IMAGETYPE_JPEG,
-			), 'https://secure.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0.jpg'),
-			array(array(
-				'width'		=> 1100,
-				'height'	=> 729,
-				'type'		=> IMAGETYPE_JPEG,
-			), 'http://www.techspot.com/articles-info/1121/images/P34WS-12.jpg')
-		);
-	}
+		$actual = \FastImageSize\getimagesize($this->path.$file);
 
-	/**
-	 * @dataProvider dataGetImageSizeRemote
-	 */
-	public function test_getImageSize_remote($expected, $url)
-	{
-		$this->assertSame($expected, $this->imageSize->getImageSize($url));
+		//Expect to match PHP getimagesize behavior
+		$expected = @\getimagesize($this->path.$file);
+		unset($expected['bits']);
+		unset($expected['channels']);
+
+		//Sometime PHP getimagesize might failed while current getimagesize extract size than compare with expected size listed
+		//Like for iff_maya
+		if ($expected === false && $shouldbe !== false) {
+			$expected = array_values($shouldbe);
+			//Dont compare more than the first 3 index
+			unset($actual[3]);
+			unset($actual['mime']);
+		}
+
+		$this->assertSame($expected, $actual);
 	}
 }

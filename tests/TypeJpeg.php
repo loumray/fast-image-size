@@ -9,29 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace FastImageSize\Tests;
+namespace FastImageSize\tests;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+use PHPUnit\Framework\TestCase;
 
-class TypeJpeg extends \PHPUnit_Framework_TestCase
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
+
+class TypeJpeg extends TestCase
 {
-	/** @var \FastImageSize\FastImageSize */
-	protected $imagesize;
-
-	/** @var \FastImageSize\Type\TypeJpeg */
-	protected $typeJpeg;
-
-	/** @var string Path to fixtures */
 	protected $path;
+    
+    public function setUp()
+    {
+        parent::setUp();
 
-	public function setUp()
-	{
-		parent::setUp();
-		$this->imagesize = new \FastImageSize\FastImageSize();
-		$this->typeJpeg = new \FastImageSize\Type\TypeJpeg($this->imagesize);
-		$this->path = __DIR__ . '/fixture/';
+        $this->path = __DIR__.DIRECTORY_SEPARATOR.'fixture'.DIRECTORY_SEPARATOR;
 	}
-
+	
 	public function dataJpegTest()
 	{
 		return array(
@@ -52,12 +46,20 @@ class TypeJpeg extends \PHPUnit_Framework_TestCase
 	 */
 	public function testJpegLength($expected, $data)
 	{
-		@file_put_contents($this->path . 'test_file.jpg', $data);
+		$filepath = $this->path . 'test_file.jpg';
+		@file_put_contents($filepath, $data);
 
-		$this->imagesize->getImageSize($this->path . 'test_file.jpg');
+		$actual = \FastImageSize\getimagesize($filepath);
 
-		$this->assertEquals($expected, $this->imagesize->getImageSize($this->path . 'test_file.jpg'));
+		if ($expected !== false) {
+			$expected = array_values($expected);
+			//Dont compare more than the first 3 index
+			unset($actual[3]);
+			unset($actual['mime']);
+		}
+		
+		@unlink($filepath);
 
-		@unlink($this->path . 'test_file.jpg');
+		$this->assertEquals($expected, $actual);
 	}
 }

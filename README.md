@@ -27,40 +27,31 @@ It is recommend to install the library using composer.
 Just add the following snippet to your composer.json:
 ```
   "require": {
-    "marc1706/fast-image-size": "1.*"
+    "loumray/fast-image-size": "2.*"
   },
 ```
 
 ### Usage
 
-Using the fast-image-size library is rather straightforward. Just create a new instance of the main class:
+fast-image-size match usage of PHP getimagesize
 ```
-$FastImageSize = new \FastImageSize\FastImageSize();
+$size = \FastImageSize\getimagesize('https://example.com/some_random_image.jpg');
 ```
+Return array matching what [PHP getimagesize function](http://php.net/manual/en/function.getimagesize.php) will return
 
-Afterwards, you can check images using the getImageSize() method:
-```
-$imageSize = $FastImageSize->getImageSize('https://example.com/some_random_image.jpg');
-```
+Index 0 and 1 contains respectively the width and the height of the image. 
 
-You can pass any local or remote image to this library as long as it's readable.
+It will however not return channels and bits index that getimagesize returns;
 
-If the library is able to determine the image size, it will return an array with the following structure (values and type might of course differ depending on your image):
-```
-$imageSize = array(
-	'width' => 16,
-	'height' => 16,
-	'type' => IMAGETYPE_PNG,
-);
-```
+As for the PHP function, you can pass any local or remote image to this library as long as it's readable.
 
 ### Automated Tests
 
 The library is being tested using unit tests to prevent possible issues.
 
-[![Build Status](https://travis-ci.org/marc1706/fast-image-size.svg?branch=master)](https://travis-ci.org/marc1706/fast-image-size)
-[![Code Coverage](https://scrutinizer-ci.com/g/marc1706/fast-image-size/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/marc1706/fast-image-size/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/marc1706/fast-image-size/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/marc1706/fast-image-size/?branch=master)
+[![Build Status](https://travis-ci.org/loumray/fast-image-size.svg?branch=master)](https://travis-ci.org/loumray/fast-image-size)
+[![Code Coverage](https://scrutinizer-ci.com/g/loumray/fast-image-size/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/loumray/fast-image-size/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/loumray/fast-image-size/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/loumray/fast-image-size/?branch=master)
 
 ### License
 

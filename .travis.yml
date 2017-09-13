@@ -11,6 +11,3 @@ php:
 
 before_script:
     - composer install
-
-script:
-    - travis/run-phpunit.sh $TRAVIS_PHP_VERSION

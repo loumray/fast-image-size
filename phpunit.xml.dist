@@ -13,7 +13,6 @@
     <testsuites>
         <testsuite name="fast-image-size test suite">
             <directory suffix=".php">./tests</directory>
-            <exclude>./tests/ImageTest.php</exclude>
         </testsuite>
     </testsuites>
     <filter>

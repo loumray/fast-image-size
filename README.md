@@ -1,6 +1,6 @@
 # A faster getimagesize
 
-[![Build Status](https://travis-ci.org/loumray/fast-image-size.svg?branch=master)](https://travis-ci.org/loumray/fast-image-size)
+[![Build Status](https://travis-ci.org/loumray/fastimagesize.svg?branch=master)](https://travis-ci.org/loumray/fastimagesize)
 
 This package provides a getimagesize function that aims to match the usage of [PHP getimagesize](http://php.net/manual/en/function.getimagesize.php) while trying to avoid the performance cost of downloading the complete file.
 

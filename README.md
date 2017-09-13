@@ -2,6 +2,8 @@
 
 [![Build Status](https://img.shields.io/travis/loumray/fastimagesize/master.svg?style=flat-square)](https://travis-ci.org/loumray/fastimagesize)
 [![Quality Score](https://img.shields.io/scrutinizer/g/loumray/fastimagesize.svg?style=flat-square)](https://scrutinizer-ci.com/g/loumray/fastimagesize)
+[![Packagist Version](https://img.shields.io/packagist/v/loumray/fastimagesize.svg?style=flat-square)](https://packagist.org/packages/loumray/fastimagesize)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 This package provides a getimagesize function that aims to match the usage of [PHP getimagesize](http://php.net/manual/en/function.getimagesize.php) while trying to avoid the performance cost of downloading the complete file.
 
@@ -47,7 +49,3 @@ Index 3 is a text string with the correct *height="yyy" width="xxx"* string that
 It will however not return *channels* and *bits* index that getimagesize sometimes returns.
 
 Just like for PHP getimagesize, you can pass any local or remote image to this library as long as it's readable.
-
-### License
-
-[The MIT License (MIT)](http://opensource.org/licenses/MIT)

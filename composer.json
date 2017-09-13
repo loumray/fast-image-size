@@ -1,7 +1,7 @@
 {
-    "name": "loumray/fast-image-size",
+    "name": "loumray/fastimagesize",
     "type": "library",
-    "description": "fast-image-size is a PHP library that does almost everything PHP's getimagesize() does but without the large overhead of downloading the complete file.",
+    "description": "This package provides a getimagesize function that aims to match the usage of PHP getimagesize while trying to avoid the performance cost of downloading the complete file.",
     "keywords": ["getimagesize", "fast", "PHP", "image", "size", "imagesize"],
     "homepage": "https://github.com/loumray/fast-image-size",
     "license": "MIT",

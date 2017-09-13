@@ -43,7 +43,7 @@ Return array matching what [PHP getimagesize function](http://php.net/manual/en/
 
 Index 0 and 1 contains respectively the width and the height of the image. 
 
-It will however not return channels and bits index that getimagesize returns;
+It will however not return channels and bits index that getimagesize returns.
 
 As for the PHP function, you can pass any local or remote image to this library as long as it's readable.
 

@@ -10,8 +10,7 @@ php:
     - hhvm
 
 before_script:
-    - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then composer require --dev --no-update phpunit/phpunit ~4; fi
-
+    - composer install
 
 script:
     - travis/run-phpunit.sh $TRAVIS_PHP_VERSION

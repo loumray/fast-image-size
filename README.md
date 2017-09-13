@@ -25,7 +25,7 @@ PHP 5.3.0 or newer is required for this library to work. But, using a supported 
 
 Via composer, run:
 ```
-  composer require loumray/fast-image-size
+  composer require loumray/fastimagesize
 ```
 
 ### Usage

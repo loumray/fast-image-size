@@ -19,11 +19,10 @@ It currently supports the following image types:
 
 ### Requirements
 
-PHP 5.3.0 or newer is required for this library to work. But, using a supported PHP version is higly recommended.
+PHP 5.3.0 or newer is required for this library to work. But, using a supported PHP version is highly recommended.
 
 ### Installation
 
-Via composer, run:
 ```
   composer require loumray/fastimagesize
 ```

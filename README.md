@@ -44,7 +44,7 @@ Index 3 is a text string with the correct *height="yyy" width="xxx"* string that
 
 *mime* is the correspondant MIME type of the image.
 
-It will however not return channels and bits index that getimagesize ometime returns.
+It will however not return *channels* and *bits* index that getimagesize sometimes returns.
 
 Just like for PHP getimagesize, you can pass any local or remote image to this library as long as it's readable.
 

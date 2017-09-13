@@ -4,7 +4,7 @@
 
 ### About
 
-fast-image-size is a PHP library that does almost everything PHP's getimagesize() does but without the large overhead of downloading the complete file.
+This package provides a getimagesize function that aims to match the usage of [PHP getimagesize](http://php.net/manual/en/function.getimagesize.php) while trying to avoid the performance cost of downloading the complete file.
 
 It currently supports the following image types:
 
@@ -21,35 +21,34 @@ It currently supports the following image types:
 
 ### Requirements
 
-PHP 5.3.0 or newer is required for this library to work. But, using a supported PHP version is recommended.
+PHP 5.3.0 or newer is required for this library to work. But, using a supported PHP version is higly recommended.
 
 ### Installation
 
-It is recommend to install the library using composer.
-Just add the following snippet to your composer.json:
+Via composer, run:
 ```
-  "require": {
-    "loumray/fast-image-size": "2.*"
-  },
+  composer require loumray/fast-image-size
 ```
 
 ### Usage
 
-fast-image-size match usage of PHP getimagesize
 ```
-$size = \FastImageSize\getimagesize('https://example.com/some_random_image.jpg');
+array \FastImageSize\getimagesize(String filename);
 ```
-Return array matching what [PHP getimagesize function](http://php.net/manual/en/function.getimagesize.php) will return
+
+Return array as per [PHP getimagesize function](http://php.net/manual/en/function.getimagesize.php)
 
 Index 0 and 1 contains respectively the width and the height of the image. 
 
-It will however not return channels and bits index that getimagesize returns.
+Index 2 is one of the [IMAGETYPE_XXX](http://php.net/manual/en/image.constants.php) constants indicating the type of the image.
 
-As for the PHP function, you can pass any local or remote image to this library as long as it's readable.
+Index 3 is a text string with the correct *height="yyy" width="xxx"* string that can be used directly in an IMG tag.
 
-### Automated Tests
+*mime* is the correspondant MIME type of the image.
 
-The library is being tested using unit tests to prevent possible issues.
+It will however not return channels and bits index that getimagesize ometime returns.
+
+Just like for PHP getimagesize, you can pass any local or remote image to this library as long as it's readable.
 
 ### License
 

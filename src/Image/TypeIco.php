@@ -13,15 +13,21 @@ namespace FastImageSize\Image;
 
 class TypeIco extends TypeBase
 {
-	protected $type = IMAGETYPE_ICO;
-
 	/** @var string ICO reserved field */
 	const ICO_RESERVED = 0;
 
 	/** @var int ICO type field */
 	const ICO_TYPE = 1;
 
-	protected $headerlength = 2 * self::LONG_SIZE;
+	protected $type = IMAGETYPE_ICO;
+	
+	public function __construct($filepath)
+	{
+		parent::__construct($filepath);
+
+		//Initializing here for PHP < 5.6 backward compatibility
+		$this->headerlength = 2 * self::LONG_SIZE;
+	}
 
 	public function extractSize()
 	{

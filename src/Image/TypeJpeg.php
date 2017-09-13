@@ -13,8 +13,6 @@ namespace FastImageSize\Image;
 
 class TypeJpeg extends TypeBase
 {
-	protected $type = IMAGETYPE_JPEG;
-	
 	/** @var int JPEG max header size. Headers can be bigger, but we'll abort
 	 *			going through the header after this */
 	const JPEG_MAX_HEADER_SIZE = 124576;
@@ -63,6 +61,8 @@ class TypeJpeg extends TypeBase
 	/** @var bool Flag whether xmp was found */
 	protected $foundXmp = false;
 
+	protected $type = IMAGETYPE_JPEG;
+	
 	protected $headerlength = self::JPEG_MAX_HEADER_SIZE;
 
 	public function extractSize()

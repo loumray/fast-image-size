@@ -13,8 +13,6 @@ namespace FastImageSize\Image;
 
 class TypeBmp extends TypeBase
 {
-	protected $type = IMAGETYPE_BMP;
-
 	/** @var int BMP header size needed for retrieving dimensions */
 	const BMP_HEADER_SIZE = 26;
 
@@ -24,6 +22,7 @@ class TypeBmp extends TypeBase
 	/** qvar int BMP dimensions offset */
 	const BMP_DIMENSIONS_OFFSET = 18;
 
+	protected $type = IMAGETYPE_BMP;
 	protected $headerlength = self::BMP_HEADER_SIZE;
 
 	public function extractSize()

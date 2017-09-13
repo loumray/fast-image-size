@@ -21,10 +21,16 @@ class TypePng extends TypeBase
 
 	protected $type = IMAGETYPE_PNG;
 
-	// Retrieve image data including the header, the IHDR tag, and the
-	// following 2 chunks for the image width and height
-	protected $headerlength = self::PNG_IHDR_OFFSET + 3 * self::LONG_SIZE;
-	
+	public function __construct($filepath)
+	{
+		parent::__construct($filepath);
+
+		//Initializing here for backward compatibility
+		// Retrieve image data including the header, the IHDR tag, and the
+		// following 2 chunks for the image width and height
+		$this->headerlength = self::PNG_IHDR_OFFSET + 3 * self::LONG_SIZE;
+	}
+
 	public function extractSize()
 	{
 		return unpack('Nwidth/Nheight', $this->getHeaderPart(self::PNG_IHDR_OFFSET + self::LONG_SIZE, self::LONG_SIZE * 2));

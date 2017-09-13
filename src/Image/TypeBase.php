@@ -64,12 +64,13 @@ abstract class TypeBase implements TypeInterface
 
 	public function isTypeMatch()
 	{
-		if (empty($this->getHeaderPart())) {
+		$header = $this->getHeaderPart();
+		if (empty($header)) {
 			return false;
 		}
 
 		//If current header size is smaller than signature
-		if (strlen($this->getHeaderPart()) < strlen($this->getSignature())) {
+		if (strlen($header) < strlen($this->getSignature())) {
 			return false;
 		}
 

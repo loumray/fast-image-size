@@ -13,8 +13,6 @@ namespace FastImageSize\Image;
 
 class TypeIff extends TypeBase
 {
-	protected $type = IMAGETYPE_IFF;
-
 	/** @var int IFF header size. Grab more than what should be needed to make
 	 * sure we have the necessary data */
 	const IFF_HEADER_SIZE = 32;
@@ -46,6 +44,8 @@ class TypeIff extends TypeBase
 	/** @var string Current byte type */
 	protected $byteType;
 
+	protected $type = IMAGETYPE_IFF;
+	
 	protected $headerlength = self::IFF_HEADER_SIZE;
 
 	public function extractSize()

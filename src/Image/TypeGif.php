@@ -13,8 +13,6 @@ namespace FastImageSize\Image;
 
 class TypeGif extends TypeBase
 {
-	protected $type = IMAGETYPE_GIF;
-
 	/** @var string GIF87a header */
 	const GIF87A_HEADER = "\x47\x49\x46\x38\x37\x61";
 
@@ -24,7 +22,15 @@ class TypeGif extends TypeBase
 	/** @var int GIF header size */
 	const GIF_HEADER_SIZE = 6;
 
-	protected $headerlength = self::GIF_HEADER_SIZE + self::SHORT_SIZE * 2;
+	protected $type = IMAGETYPE_GIF;
+
+	public function __construct($filepath)
+	{
+		parent::__construct($filepath);
+
+		//Initializing here for PHP < 5.6 backward compatibility
+		$this->headerlength = self::GIF_HEADER_SIZE + self::SHORT_SIZE * 2;
+	}
 
 	public function extractSize()
 	{

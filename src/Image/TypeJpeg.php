@@ -157,23 +157,23 @@ class TypeJpeg extends TypeBase
 	 */
 	protected function checkForAppMarker($dataLength, &$index)
 	{
-		if ($this->isApp1Marker($this->getHeaderPart($index, 1), $this->getHeaderPart($index+1, 1)) ||
-			$this->isAppMarker($this->getHeaderPart($index, 1), $this->getHeaderPart($index+1, 1))
+		if (!$this->isApp1Marker($this->getHeaderPart($index, 1), $this->getHeaderPart($index+1, 1)) &&
+			!$this->isAppMarker($this->getHeaderPart($index, 1), $this->getHeaderPart($index+1, 1))
 		) {
-			// Extract length from APP marker
-			list(, $unpacked) = unpack("H*", $this->getHeaderPart($index + self::SHORT_SIZE, 2));
+			return true;
+		}
 
-			$length = hexdec(substr($unpacked, 0, 4));
+		// Extract length from APP marker
+		list(, $unpacked) = unpack("H*", $this->getHeaderPart($index + self::SHORT_SIZE, 2));
+		
+		$this->setApp1Flags($this->getHeaderPart($index, 1));
 
-			$this->setApp1Flags($this->getHeaderPart($index, 1));
+		// Skip over length of APP header
+		$index += (int) hexdec(substr($unpacked, 0, 4));
 
-			// Skip over length of APP header
-			$index += (int) $length;
-
-			// Make sure we don't exceed the data length
-			if ($index >= $dataLength) {
-				return false;
-			}
+		// Make sure we don't exceed the data length
+		if ($index >= $dataLength) {
+			return false;
 		}
 
 		return true;

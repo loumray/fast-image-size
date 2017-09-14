@@ -56,15 +56,7 @@ class TypeTif extends TypeBase
 		$this->size = array();
 
 		//Set byte type based on signature in header
-		$this->typeLong = 'N';
-		$this->typeShort = 'n';
-		$this->type = IMAGETYPE_TIFF_MM;
-
-		if ($this->getSignature() === self::TIF_SIGNATURE_INTEL) {
-			$this->typeLong = 'V';
-			$this->typeShort = 'v';
-			$this->type = IMAGETYPE_TIFF_II;
-		}
+		$this->setType();
 
 		// Get offset of IFD
 		list(, $offset) = unpack($this->typeLong, $this->getHeaderPart(self::LONG_SIZE, self::LONG_SIZE));
@@ -93,6 +85,27 @@ class TypeTif extends TypeBase
 		}
 
 		return $this->size;
+	}
+
+	public function getType()
+	{
+		$this->setType();
+		
+		return parent::getType();
+	}
+
+	public function setType()
+	{
+		//Set byte type based on signature in header
+		$this->typeLong = 'N';
+		$this->typeShort = 'n';
+		$this->type = IMAGETYPE_TIFF_MM;
+
+		if ($this->getSignature() === self::TIF_SIGNATURE_INTEL) {
+			$this->typeLong = 'V';
+			$this->typeShort = 'v';
+			$this->type = IMAGETYPE_TIFF_II;
+		}
 	}
 
 	public function getSignature()

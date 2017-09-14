@@ -133,8 +133,6 @@ abstract class TypeBase implements TypeInterface
 			);
 		}
 		
-		$data = @file_get_contents($this->filepath, null, stream_context_create($opts), $start, $length);
-
-		return empty($data) ? false : $data;
+		return @file_get_contents($this->filepath, null, stream_context_create($opts), $start, $length);
 	}
 }

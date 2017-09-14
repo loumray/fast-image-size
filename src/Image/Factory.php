@@ -62,7 +62,7 @@ class Factory
 
 	public static function getClassname($imageType)
 	{
-		return '\\FastImageSize\\Image\\Type'.ucfirst($imageType);
+		return __NAMESPACE__.'\\Type'.ucfirst($imageType);
 	}
 
 	public static function getExtensionType($filepath)
@@ -75,11 +75,7 @@ class Factory
 
 		//Find approriate type of extension and instantiate Type object
 		foreach (self::$supportedTypes as $imageType => $extensions) {
-			foreach ($extensions as $ext) {
-				if ($ext != $extension) {
-					continue;
-				}
-				
+			if (in_array($extension, $extensions)) {
 				return $imageType;
 			}
 		}
@@ -101,7 +97,6 @@ class Factory
 			return new $className($filepath);
 		}
 		
-
 		// Jpeg type uses the most bytes, so grab the maximum image bytes we could need
 		$image = new TypeJpeg($filepath);
 		$maxedSizedHeader = $image->getHeaderPart();
@@ -122,5 +117,4 @@ class Factory
 		//Unsupported extension and could not match the type signature
 		return null;
 	}
-
 }

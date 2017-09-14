@@ -60,11 +60,25 @@ class Factory
 		)
 	);
 
+	/**
+	 * Create image object from filepath
+	 *
+	 * @param string $imageType
+	 *
+	 * @return string classname
+	 */
 	public static function getClassname($imageType)
 	{
 		return __NAMESPACE__.'\\Type'.ucfirst($imageType);
 	}
 
+	/**
+	 * Get type from filepath extension
+	 *
+	 * @param string $filepath
+	 *
+	 * @return string|false imagetype or false if not found
+	 */
 	public static function getExtensionType($filepath)
 	{
 		$extension = strtolower(pathinfo(parse_url($filepath, PHP_URL_PATH), PATHINFO_EXTENSION));
@@ -87,6 +101,8 @@ class Factory
 	 * Create image object from filepath
 	 *
 	 * @param string $filepath
+	 *
+	 * @return TypeInterface|null
 	 */
 	public static function create($filepath)
 	{
@@ -97,6 +113,19 @@ class Factory
 			return new $className($filepath);
 		}
 		
+		//Could not find type, try matching type
+		return self::detectAndCreate($filepath);
+	}
+
+	/**
+	 * Detect image type by trials and create appropriate TypeInterface object
+	 *
+	 * @param string $filepath
+	 *
+	 * @return TypeInterface|null
+	 */
+	public static function detectAndCreate($filepath)
+	{
 		// Jpeg type uses the most bytes, so grab the maximum image bytes we could need
 		$image = new TypeJpeg($filepath);
 		$maxedSizedHeader = $image->getHeaderPart();
@@ -113,8 +142,7 @@ class Factory
 				return $image;
 			}
 		}
-		
-		//Unsupported extension and could not match the type signature
+		//Unsupported extension and/or could not match the type signature
 		return null;
 	}
 }

@@ -67,9 +67,6 @@ class TypeJpeg extends TypeBase
 
 	public function extractSize()
 	{
-		// Do not force the data length
-		// $this->data = $this->getImage($filename, 0, self::JPEG_MAX_HEADER_SIZE, false);
-
 		$data = $this->getHeaderPart();
 
 		// since we check $i + 1 we need to stop one step earlier

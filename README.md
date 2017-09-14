@@ -1,9 +1,10 @@
 # A faster getimagesize
 
 [![Build Status](https://img.shields.io/travis/loumray/fastimagesize/master.svg?style=flat-square)](https://travis-ci.org/loumray/fastimagesize)
-[![Quality Score](https://img.shields.io/scrutinizer/g/loumray/fastimagesize.svg?style=flat-square)](https://scrutinizer-ci.com/g/loumray/fastimagesize)
-[![Packagist Version](https://img.shields.io/packagist/v/loumray/fastimagesize.svg?style=flat-square)](https://packagist.org/packages/loumray/fastimagesize)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/loumray/fastimagesize.svg?style=flat-square)](https://scrutinizer-ci.com/g/loumray/fastimagesize/?branch=master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Packagist Version](https://img.shields.io/packagist/v/loumray/fastimagesize.svg?style=flat-square)](https://packagist.org/packages/loumray/fastimagesize)
+[![Quality Score](https://img.shields.io/scrutinizer/g/loumray/fastimagesize.svg?style=flat-square)](https://scrutinizer-ci.com/g/loumray/fastimagesize)
 
 This package provides a getimagesize function that aims to match the usage of [PHP getimagesize](http://php.net/manual/en/function.getimagesize.php) while trying to avoid the performance cost of downloading the complete file.
 

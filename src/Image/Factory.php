@@ -84,9 +84,9 @@ class Factory
 	}
 
 	/**
-	 * Create Typeconstructor for image types
+	 * Create image object from filepath
 	 *
-	 * @param FastImageSize $fastImageSize
+	 * @param string $filepath
 	 */
 	public static function create($filepath)
 	{

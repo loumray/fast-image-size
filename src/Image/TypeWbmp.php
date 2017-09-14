@@ -24,7 +24,7 @@ class TypeWbmp extends TypeBase
 		// Check if dimensions are valid. A file might be recognised as WBMP
 		// rather easily (see extra check for JPEG2000).
 		if (!$this->validDimensions($size)) {
-			return false;
+			return array();
 		}
 
 		return $size;

@@ -22,21 +22,21 @@ interface TypeInterface
 	/**
 	 * Get size of supplied image
 	 *
-	 * @return array or false on failure
+	 * @return array|false image size data or false on failure
 	 */
 	public function getSize();
 
 	/**
 	 * Extract size out of minimal image data
 	 *
-	 * @return array or false on failure
+	 * @return array|false image size or false on failure
 	 */
 	public function extractSize();
 
 	/**
 	 * Get signature image
 	 *
-	 * @return string or false on failure
+	 * @return string|false image signature or false on failure
 	 */
 	public function getSignature();
 

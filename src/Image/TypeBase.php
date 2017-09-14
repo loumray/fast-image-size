@@ -107,12 +107,9 @@ abstract class TypeBase implements TypeInterface
 	 *
 	 * @param int $start Offset position at which reading of the image should start
 	 * @param int $length Maximum length that should be read
-	 * @param bool $forceLength True if the length needs to be the specified
-	 *			length, false if not. Default: true
 	 *
 	 * @return false|string Image data or false if result was empty
 	 */
-	// protected function getData($start, $length, $forceLength = true)
 	protected function getData($start, $length)
 	{
 		$opts = array(

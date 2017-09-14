@@ -69,9 +69,8 @@ abstract class TypeBase implements TypeInterface
 			return false;
 		}
 
-		$signature = $this->getSignature();
 		//If current header size is smaller than signature
-		if (empty($signature) || strlen($header) < strlen($signature)) {
+		if (strlen($header) < strlen(/** @scrutinizer ignore-type */$this->getSignature())) {
 			return false;
 		}
 

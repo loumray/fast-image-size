@@ -127,4 +127,37 @@ class FastImageSize extends TestCase
 
 		$this->assertSame($expected, $actual);
 	}
+
+	/**
+	 * @dataProvider dataGetImageSize
+	 */
+	 public function testOldGetImageSize($file, $mime_type, $shouldbe)
+	 {
+ 
+		$FastImageSize = new \FastImageSize\FastImageSize();
+		
+		$actual = $FastImageSize->getImageSize($this->path.$file);
+ 
+		if (!empty($actual)) {
+			$actual = array_values($actual);
+		}
+
+		//Expect to match PHP getimagesize behavior
+		$expected = @\getimagesize($this->path.$file);
+		unset($expected[3]);
+		unset($expected['mime']);
+		unset($expected['bits']);
+		unset($expected['channels']);
+
+		//Sometime PHP getimagesize might failed while current getimagesize extract size than compare with expected size listed
+		//Like for iff_maya
+		if ($expected === false && $shouldbe !== false) {
+			$expected = array_values($shouldbe);
+			//Dont compare more than the first 3 index
+			unset($actual[3]);
+			unset($actual['mime']);
+		}
+
+		$this->assertSame($expected, $actual);
+	 }
 }

@@ -52,4 +52,27 @@ class RemoteTest extends TestCase
 
 		$this->assertSame($expected, $actual);
 	}
+
+	/**
+	 * @dataProvider dataGetImageSizeRemote
+	 */
+	public function testOldGetImageSize_remote($url)
+	{
+		$FastImageSize = new \FastImageSize\FastImageSize();
+		
+		$actual = $FastImageSize->getImageSize($url);
+ 
+		if (!empty($actual)) {
+			$actual = array_values($actual);
+		}
+		
+		//Try to match PHP getimagesize behavior
+		$expected = @\getimagesize($url);
+		unset($expected[3]);
+		unset($expected['mime']);
+		unset($expected['bits']);
+		unset($expected['channels']);
+
+		$this->assertSame($expected, $actual);
+	}
 }

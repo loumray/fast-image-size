@@ -23,7 +23,7 @@ It currently supports the following image types:
 
 ### Requirements
 
-PHP 5.3.0 or newer is required for this library to work. But, using a supported PHP version is highly recommended.
+PHP 5.3.0 or greater.
 
 ### Installation
 
@@ -34,7 +34,7 @@ PHP 5.3.0 or newer is required for this library to work. But, using a supported 
 ### Usage
 
 ```
-array \FastImageSize\getimagesize(String filename);
+array \FastImageSize\getimagesize(String filepath);
 ```
 
 Return array as per [PHP getimagesize function](http://php.net/manual/en/function.getimagesize.php)
@@ -50,3 +50,21 @@ Index 3 is a text string with the correct *height="yyy" width="xxx"* string that
 It will however not return *channels* and *bits* index that getimagesize sometimes returns.
 
 Just like for PHP getimagesize, you can pass any local or remote image to this library as long as it's readable.
+
+### Backward Compatibility
+
+For backward compatibility, the FastImageSize class is still available. So you can still make use of
+```
+$FastImageSize = new \FastImageSize\FastImageSize();
+
+$imageSize = $FastImageSize->getImageSize(String filepath);
+```
+And this will return the array size
+
+```
+array(
+  'width' => 16,
+  'height' => 16,
+  'type' => IMAGETYPE_PNG,
+);
+```
